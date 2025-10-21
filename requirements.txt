@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+psycopg2-binary
+SQLAlchemy>=1.4
+alembic
+passlib>=1
+bcrypt==4.1.0
+python-jose[cryptography]
+pydantic
+pydantic[email]
+celery[redis]
+python-dotenv
+asyncpg
