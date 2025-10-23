@@ -129,7 +129,7 @@ sudo service redis-server start
 #### Method 2: Up and run container
 #### 7. Run containerized app
 ```bash
-./barista.sh shop:build
+./barista.sh compose:build
 ```
 
 ### Learn more about `barista.sh`
