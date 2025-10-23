@@ -19,7 +19,6 @@ class User(Base):
     role = Column(String, default="user")
     verification_code = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-
-    # is_deleted = Column(Boolean, default=False)
-    # updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-    # deleted_at = Column(DateTime(timezone=True))
+    is_deleted = Column(Boolean, default=False)
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    deleted_at = Column(DateTime(timezone=True))

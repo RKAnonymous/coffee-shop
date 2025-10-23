@@ -7,6 +7,7 @@ class UserCreate(BaseModel):
     first_name: Optional[str]
     last_name: Optional[str]
 
+
 class UserRead(BaseModel):
     id: int
     email: EmailStr
@@ -19,6 +20,7 @@ class UserRead(BaseModel):
         "from_attributes": True
     }
 
+
 class UserUpdate(BaseModel):
     first_name: Optional[str]
     last_name: Optional[str]
@@ -26,6 +28,12 @@ class UserUpdate(BaseModel):
 
 class UserUpdateRole(BaseModel):
     role: str
+    user_id: int
+
+
+class VerifyUserSchema(BaseModel):
+    email: EmailStr
+    code: str
 
 
 class Token(BaseModel):
@@ -33,6 +41,6 @@ class Token(BaseModel):
     refresh_token: str
 
 
-class VerifySchema(BaseModel):
-    email: EmailStr
-    code: str
+class RefreshTokenSchema(BaseModel):
+    refresh_token: str
+

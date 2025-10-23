@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from .. import schemas, views, db, deps
+from app import schemas, views, db
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -21,8 +21,17 @@ async def login(form_data: schemas.UserCreate, conn: AsyncSession = Depends(db.g
     }
 
 @router.post("/verify", response_model=schemas.UserRead)
-async def verify_user_endpoint(data: schemas.VerifySchema, conn: AsyncSession = Depends(db.get_db)):
+async def verify_user_endpoint(data: schemas.VerifyUserSchema, conn: AsyncSession = Depends(db.get_db)):
     user = await views.verify_user(conn, data.email, data.code)
     if not user:
         raise HTTPException(status_code=400, detail="Invalid verification code")
     return user
+
+
+@router.post("/refresh", response_model=schemas.Token)
+async def refresh_token(data: schemas.RefreshTokenSchema):
+    try:
+        tokens = views.refresh_user_token(data.refresh_token)
+        return tokens
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e.args))
